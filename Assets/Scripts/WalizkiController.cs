@@ -35,9 +35,15 @@ public class WalizkiController : MonoBehaviour
     {
         // Select a random model
         int index = Random.Range(0, modelPrefabs.Length);
+        int rotated = Random.Range(0, 2);
         Vector3 startPosition = modelPrefabs[index].transform.position;
         startPosition.x = StartX;
         incomingBaggage = Instantiate(modelPrefabs[index], startPosition, modelPrefabs[index].transform.rotation);
+        if (rotated == 1)
+        {
+            incomingBaggage.transform.Rotate(new Vector3(0, 0, 180));
+        }
+
         movingLuggage = true;
     }
 
