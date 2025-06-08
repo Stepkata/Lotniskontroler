@@ -5,6 +5,8 @@ public class WalizkiController : MonoBehaviour
     [Header("Assign model prefabs here")]
     public GameObject[] modelPrefabs;
 
+    public GameObject myszka;
+
     [Header("Movement settings")]
     public float moveSpeed = 2f;
 
@@ -16,7 +18,7 @@ public class WalizkiController : MonoBehaviour
     private GameObject incomingBaggage;
     private GameObject outcomingBaggage;
 
-    private bool movingLuggage = false;
+    public bool movingLuggage = false;
 
     void Start()
     {
@@ -29,13 +31,14 @@ public class WalizkiController : MonoBehaviour
     }
 
 
-    void SpawnBaggage()
+    public void SpawnBaggage()
     {
         // Select a random model
         int index = Random.Range(0, modelPrefabs.Length);
         Vector3 startPosition = modelPrefabs[index].transform.position;
         startPosition.x = StartX;
         incomingBaggage = Instantiate(modelPrefabs[index], startPosition, modelPrefabs[index].transform.rotation);
+        movingLuggage = true;
     }
 
     void Update()
@@ -43,7 +46,6 @@ public class WalizkiController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A) && !movingLuggage)
         {
             SpawnBaggage();
-            movingLuggage = true;
         }
 
         if (movingLuggage)
