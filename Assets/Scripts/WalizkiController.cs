@@ -7,6 +7,8 @@ public class WalizkiController : MonoBehaviour
 
     public GameObject myszka;
 
+    public VRInputManager VRInput;
+
     [Header("Movement settings")]
     public float moveSpeed = 2f;
 
@@ -28,8 +30,16 @@ public class WalizkiController : MonoBehaviour
             return;
         }
 
+        VRInput.PrimaryButtonEvent.AddListener(onPrimaryButtonEvent);
     }
 
+    private void onPrimaryButtonEvent(bool pressed)
+    {
+        if (pressed && !movingLuggage)
+        {
+            SpawnBaggage();
+        }
+    }
 
     public void SpawnBaggage()
     {
