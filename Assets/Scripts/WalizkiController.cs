@@ -9,6 +9,10 @@ public class WalizkiController : MonoBehaviour
 
     public VRInputManager VRInput;
 
+    public XRayScreen Screen;
+
+    public ImageLoader XRayLoader;
+
     [Header("Movement settings")]
     public float moveSpeed = 2f;
 
@@ -22,6 +26,8 @@ public class WalizkiController : MonoBehaviour
 
     public bool movingLuggage = false;
 
+    public XRayPlate CurrentPlate;
+
     void Start()
     {
         if (modelPrefabs == null || modelPrefabs.Length == 0)
@@ -31,14 +37,23 @@ public class WalizkiController : MonoBehaviour
         }
 
         VRInput.PrimaryButtonEvent.AddListener(onPrimaryButtonEvent);
+        XRayLoader.LoadingFinishedEvent.AddListener(onLoadingFinishedEvent);
     }
 
     private void onPrimaryButtonEvent(bool pressed)
     {
         if (pressed && !movingLuggage)
         {
+            Screen.Hide();
+            XRayLoader.LoadRandom();
             SpawnBaggage();
         }
+    }
+
+    private void onLoadingFinishedEvent(XRayPlate plate)
+    {
+        CurrentPlate = plate;
+        Screen.CurrentPlate = plate;
     }
 
     public void SpawnBaggage()
@@ -84,6 +99,7 @@ public class WalizkiController : MonoBehaviour
                 }
                 outcomingBaggage = incomingBaggage;
                 movingLuggage = false;
+                Screen.Show();
             }
         }
         
