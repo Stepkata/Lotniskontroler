@@ -826,6 +826,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
   m_PrefabInstance: {fileID: 1565718642}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &883568724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4080277042268158424, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+  m_PrefabInstance: {fileID: 1009416170}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4733c5f009d26ad49b3685117b8d3eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &972948304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,6 +1550,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1e68367ec41424699a6e2bd6876ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Interactor: {fileID: 883568724}
+  VRInput: {fileID: 1286065183}
+  Thickness: 0.005
+  LineColor: {r: 1, g: 0, b: 0, a: 1}
+  CurrentRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
 --- !u!114 &1964602100 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 11400010, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}

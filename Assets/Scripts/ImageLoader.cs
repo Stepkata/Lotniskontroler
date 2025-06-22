@@ -83,10 +83,10 @@ public class ImageLoader : MonoBehaviour
                 var text = req2.downloadHandler.text;
                 string[] strings = text.Split();
                 CurrentPlate.Groundtruth = new Rect(0, 0, 0, 0);
-                CurrentPlate.Groundtruth.xMin = float.Parse(strings[2], System.Globalization.CultureInfo.InvariantCulture);
-                CurrentPlate.Groundtruth.yMin = float.Parse(strings[3], System.Globalization.CultureInfo.InvariantCulture);
-                CurrentPlate.Groundtruth.xMax = float.Parse(strings[0], System.Globalization.CultureInfo.InvariantCulture);
-                CurrentPlate.Groundtruth.yMax = float.Parse(strings[1], System.Globalization.CultureInfo.InvariantCulture);
+                CurrentPlate.Groundtruth.x = float.Parse(strings[1], System.Globalization.CultureInfo.InvariantCulture);
+                CurrentPlate.Groundtruth.y = float.Parse(strings[2], System.Globalization.CultureInfo.InvariantCulture);
+                CurrentPlate.Groundtruth.width = float.Parse(strings[3], System.Globalization.CultureInfo.InvariantCulture);
+                CurrentPlate.Groundtruth.height = float.Parse(strings[4], System.Globalization.CultureInfo.InvariantCulture);
                 LoadingFinishedEvent.Invoke(CurrentPlate);
             }
         }
