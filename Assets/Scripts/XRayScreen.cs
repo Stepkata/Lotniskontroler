@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Oculus.Interaction;
 
 public class XRayScreen : MonoBehaviour
@@ -11,8 +12,10 @@ public class XRayScreen : MonoBehaviour
     public float Thickness = 0.005f;
     public Color LineColor = new Color(1, 0, 0);
 
+    public UnityEvent<Rect> ResultEvent;
+
     public XRayPlate CurrentPlate;
-    public Rect CurrentRect;
+    public Rect? CurrentRect;
 
     bool shown = false;
     bool selecting = false;
@@ -21,7 +24,18 @@ public class XRayScreen : MonoBehaviour
 
     void Start()
     {
+        VRInput.PrimaryButtonEvent.AddListener(onPrimaryButtonEvent);
         VRInput.TriggerEvent.AddListener(onTriggerEvent);
+    }
+
+    private void onPrimaryButtonEvent(bool pressed)
+    {
+        Debug.Log($"{shown} ; {pressed} ; {CurrentRect}");
+        if (shown && pressed && CurrentRect is not null)
+        {
+            Hide();
+            ResultEvent.Invoke(CurrentRect.Value);
+        }
     }
 
     private void onTriggerEvent(bool pressed)
@@ -44,7 +58,7 @@ public class XRayScreen : MonoBehaviour
                 System.Math.Max(point1.x, point2.x), System.Math.Max(point1.y, point2.y));
 
             Material m = gameObject.GetComponent<MeshRenderer>().material;
-            m.mainTexture = drawRect(CurrentRect);
+            m.mainTexture = drawRect(CurrentRect.Value);
         }
     }
 
@@ -76,6 +90,7 @@ public class XRayScreen : MonoBehaviour
         Material m = gameObject.GetComponent<MeshRenderer>().material;
         m.color = new Color(0.5f, 0.5f, 0.5f);
         m.mainTexture = CurrentPlate.Image;
+        CurrentRect = null;
     }
 
     Vector2 onSurface(Vector3 vec)

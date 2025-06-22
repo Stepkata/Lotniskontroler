@@ -13,6 +13,8 @@ public class WalizkiController : MonoBehaviour
 
     public ImageLoader XRayLoader;
 
+    public ScoreTracker Score;
+
     [Header("Movement settings")]
     public float moveSpeed = 2f;
 
@@ -38,13 +40,13 @@ public class WalizkiController : MonoBehaviour
 
         VRInput.PrimaryButtonEvent.AddListener(onPrimaryButtonEvent);
         XRayLoader.LoadingFinishedEvent.AddListener(onLoadingFinishedEvent);
+        Screen.ResultEvent.AddListener(onResultEvent);
     }
 
     private void onPrimaryButtonEvent(bool pressed)
     {
         if (pressed && !movingLuggage)
         {
-            Screen.Hide();
             XRayLoader.LoadRandom();
             SpawnBaggage();
         }
@@ -54,6 +56,13 @@ public class WalizkiController : MonoBehaviour
     {
         CurrentPlate = plate;
         Screen.CurrentPlate = plate;
+    }
+
+    private void onResultEvent(Rect rect)
+    {
+        if (CurrentPlate == null) return;
+        Score.Evaluate("Cz³owiek", rect, CurrentPlate.Groundtruth);
+        Score.Show();
     }
 
     public void SpawnBaggage()
