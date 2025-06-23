@@ -502,7 +502,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 124.07299
   m_InnerSpotAngle: 111.95536
@@ -613,6 +613,8 @@ MonoBehaviour:
   - {fileID: 5382075665349016640, guid: 3379c4cc9a87aa0448e0b209e5329003, type: 3}
   - {fileID: 6464197118238555398, guid: 759b0855427820a4eabe47c8d6595d9e, type: 3}
   - {fileID: 1013125172030783479, guid: b9861348404c3144c8fd57d2c7c9c8da, type: 3}
+  AIEmployees:
+  - {fileID: 1294353977}
   myszka: {fileID: 525298849}
   VRInput: {fileID: 1286065183}
   Screen: {fileID: 1877926094}
@@ -1443,6 +1445,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1294353975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1294353976}
+  - component: {fileID: 1294353977}
+  m_Layer: 0
+  m_Name: AI Employee 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1294353976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294353975}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1625242011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1294353977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294353975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097dff85e5c7f424f9ecb587014536b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: AI 1
+  NeuralModel: {fileID: 5022602860645237092, guid: 59f6425449b482b4a8841fb3997072c2, type: 3}
 --- !u!1 &1299968041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,6 +1802,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreTextPrefab: {fileID: 6229059593336430985, guid: 3b90bfa31f4462c4c9e48b9c600e3536, type: 3}
   Grid: {fileID: 692102918}
+--- !u!1 &1625242010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1625242011}
+  m_Layer: 0
+  m_Name: AI Employees
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1625242011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625242010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.7756057, y: 0.86599994, z: 0.22999996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1294353976}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1658634102
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,3 +2214,4 @@ SceneRoots:
   - {fileID: 1877926092}
   - {fileID: 204021260}
   - {fileID: 587293969}
+  - {fileID: 1625242011}

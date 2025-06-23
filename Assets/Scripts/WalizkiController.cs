@@ -5,6 +5,8 @@ public class WalizkiController : MonoBehaviour
     [Header("Assign model prefabs here")]
     public GameObject[] modelPrefabs;
 
+    public AIEmployee[] AIEmployees;
+
     public GameObject myszka;
 
     public VRInputManager VRInput;
@@ -26,6 +28,8 @@ public class WalizkiController : MonoBehaviour
     private GameObject incomingBaggage;
     private GameObject outcomingBaggage;
 
+    private bool started = false;
+
     public bool movingLuggage = false;
 
     public XRayPlate CurrentPlate;
@@ -38,6 +42,13 @@ public class WalizkiController : MonoBehaviour
             return;
         }
 
+        Score.AddPlayer("Cz³owiek");
+        foreach (var employee in AIEmployees)
+        {
+            Score.AddPlayer(employee.Name);
+        }
+        Score.Show();
+
         VRInput.PrimaryButtonEvent.AddListener(onPrimaryButtonEvent);
         XRayLoader.LoadingFinishedEvent.AddListener(onLoadingFinishedEvent);
         Screen.ResultEvent.AddListener(onResultEvent);
@@ -45,10 +56,11 @@ public class WalizkiController : MonoBehaviour
 
     private void onPrimaryButtonEvent(bool pressed)
     {
-        if (pressed && !movingLuggage)
+        if (!started && pressed && !movingLuggage)
         {
             XRayLoader.LoadRandom();
             SpawnBaggage();
+            started = true;
         }
     }
 
@@ -56,6 +68,11 @@ public class WalizkiController : MonoBehaviour
     {
         CurrentPlate = plate;
         Screen.CurrentPlate = plate;
+        foreach (var employee in AIEmployees)
+        {
+            var rect = employee.Recognize(CurrentPlate.Image);
+            Score.Evaluate(employee.Name, rect, CurrentPlate.Groundtruth);
+        }
     }
 
     private void onResultEvent(Rect rect)
@@ -63,6 +80,8 @@ public class WalizkiController : MonoBehaviour
         if (CurrentPlate == null) return;
         Score.Evaluate("Cz³owiek", rect, CurrentPlate.Groundtruth);
         Score.Show();
+        XRayLoader.LoadRandom();
+        SpawnBaggage();
     }
 
     public void SpawnBaggage()
@@ -83,11 +102,6 @@ public class WalizkiController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && !movingLuggage)
-        {
-            SpawnBaggage();
-        }
-
         if (movingLuggage)
         {
             if (incomingBaggage != null)

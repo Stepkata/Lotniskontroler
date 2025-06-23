@@ -82,11 +82,12 @@ public class ImageLoader : MonoBehaviour
                 Debug.Log($"Loaded labels");
                 var text = req2.downloadHandler.text;
                 string[] strings = text.Split();
-                CurrentPlate.Groundtruth = new Rect(0, 0, 0, 0);
-                CurrentPlate.Groundtruth.x = float.Parse(strings[1], System.Globalization.CultureInfo.InvariantCulture);
-                CurrentPlate.Groundtruth.y = float.Parse(strings[2], System.Globalization.CultureInfo.InvariantCulture);
-                CurrentPlate.Groundtruth.width = float.Parse(strings[3], System.Globalization.CultureInfo.InvariantCulture);
-                CurrentPlate.Groundtruth.height = float.Parse(strings[4], System.Globalization.CultureInfo.InvariantCulture);
+                float x = float.Parse(strings[1], System.Globalization.CultureInfo.InvariantCulture);
+                float y = float.Parse(strings[2], System.Globalization.CultureInfo.InvariantCulture);
+                float w = float.Parse(strings[3], System.Globalization.CultureInfo.InvariantCulture);
+                float h = float.Parse(strings[4], System.Globalization.CultureInfo.InvariantCulture);
+
+                CurrentPlate.Groundtruth = new Rect(x - w / 2, y - h / 2, w, h);
                 LoadingFinishedEvent.Invoke(CurrentPlate);
             }
         }

@@ -15,7 +15,7 @@ public class XRayScreen : MonoBehaviour
     public UnityEvent<Rect> ResultEvent;
 
     public XRayPlate CurrentPlate;
-    public Rect? CurrentRect;
+    public Rect? CurrentRect = null;
 
     bool shown = false;
     bool selecting = false;
@@ -30,7 +30,6 @@ public class XRayScreen : MonoBehaviour
 
     private void onPrimaryButtonEvent(bool pressed)
     {
-        Debug.Log($"{shown} ; {pressed} ; {CurrentRect}");
         if (shown && pressed && CurrentRect is not null)
         {
             Hide();
@@ -88,7 +87,7 @@ public class XRayScreen : MonoBehaviour
     void reset()
     {
         Material m = gameObject.GetComponent<MeshRenderer>().material;
-        m.color = new Color(0.5f, 0.5f, 0.5f);
+        m.color = new Color(2, 2, 2);
         m.mainTexture = CurrentPlate.Image;
         CurrentRect = null;
     }

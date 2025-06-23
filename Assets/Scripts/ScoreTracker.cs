@@ -10,13 +10,11 @@ public class ScoreTracker : MonoBehaviour
     public TMP_Text ScoreTextPrefab;
     public GridLayoutGroup Grid;
 
-    private Dictionary<string, int> scores;
+    private Dictionary<string, int> scores = new Dictionary<string, int>();
 
-    void Start()
+    public void AddPlayer(string player)
     {
-        scores = new Dictionary<string, int>();
-        scores.Add("Cz³owiek", 0);
-        Show();
+        scores.Add(player, 0);
     }
 
     public void Evaluate(string player, Rect rect, Rect gt)
@@ -39,7 +37,7 @@ public class ScoreTracker : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        foreach (var item in scores.OrderBy(x => x.Value))
+        foreach (var item in scores.OrderByDescending(x => x.Value))
         {
             var name = Instantiate(ScoreTextPrefab, Grid.transform);
             name.text = item.Key;
@@ -58,6 +56,6 @@ public class ScoreTracker : MonoBehaviour
         float hInter = yInter2 - yInter1;
         float areaInter = wInter * hInter;
         float areaUnion = rect1.width * rect1.height + rect2.width * rect2.height - areaInter;
-        return areaInter / areaUnion;
+        return System.Math.Clamp(areaInter / areaUnion, 0, 1);
     }
 }
