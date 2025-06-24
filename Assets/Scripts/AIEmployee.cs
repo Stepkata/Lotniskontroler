@@ -8,17 +8,21 @@ public class AIEmployee : MonoBehaviour
     public string Name;
     public NNModel NeuralModel;
 
+    private Model model;
     private IWorker worker;
     
     void Start()
     {
-        worker = NeuralModel.CreateWorker();
+        model = ModelLoader.Load(NeuralModel);
+        worker = WorkerFactory.CreateWorker(WorkerFactory.Type.ComputePrecompiled, model);
     }
 
    public Rect Recognize(Texture2D image)
     {
+        image = resize(image, model.inputs[0].shape[5], model.inputs[0].shape[6]);
         using (var input = new Tensor(image, channels: 3))
         {
+            Debug.Log((input.width, input.height));
             var output = worker.Execute(input).PeekOutput("output0");
             var f = output[0];
             int argmax = getArgmax(output);
@@ -46,5 +50,16 @@ public class AIEmployee : MonoBehaviour
             }
         }
         return argmax;
+    }
+
+    private Texture2D resize(Texture2D texture2D, int targetX, int targetY)
+    {
+        RenderTexture rt = new RenderTexture(targetX, targetY, 24);
+        RenderTexture.active = rt;
+        Graphics.Blit(texture2D, rt);
+        Texture2D result = new Texture2D(targetX, targetY);
+        result.ReadPixels(new Rect(0, 0, targetX, targetY), 0, 0);
+        result.Apply();
+        return result;
     }
 }

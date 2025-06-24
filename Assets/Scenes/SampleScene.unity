@@ -615,6 +615,7 @@ MonoBehaviour:
   - {fileID: 1013125172030783479, guid: b9861348404c3144c8fd57d2c7c9c8da, type: 3}
   AIEmployees:
   - {fileID: 1294353977}
+  - {fileID: 1400107361}
   myszka: {fileID: 525298849}
   VRInput: {fileID: 1286065183}
   Screen: {fileID: 1877926094}
@@ -1523,6 +1524,52 @@ Transform:
   - {fileID: 508977805}
   m_Father: {fileID: 1565718643}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1400107359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1400107360}
+  - component: {fileID: 1400107361}
+  m_Layer: 0
+  m_Name: AI Employee 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1400107360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400107359}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1625242011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1400107361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400107359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097dff85e5c7f424f9ecb587014536b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: AI 2
+  NeuralModel: {fileID: 5022602860645237092, guid: 69817049f382d75419b2e9655ca66a48, type: 3}
 --- !u!1001 &1416645563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1832,6 +1879,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1294353976}
+  - {fileID: 1400107360}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1658634102
